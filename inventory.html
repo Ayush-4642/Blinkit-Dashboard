@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RetailIQ – Inventory Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+  <div class="blinkit-logo">
+    <span class="blink-part">blink</span><span class="it-part">it</span>
+  </div>
+  <div class="brand-tagline">RetailIQ Platform</div>
+</div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Analytics</div>
+      <a class="nav-item" href="executive.html"><span class="nav-icon">🏠</span> Executive</a>
+      <a class="nav-item" href="customers.html"><span class="nav-icon">👥</span> Customers</a>
+      <a class="nav-item" href="delivery.html"><span class="nav-icon">🚚</span> Delivery</a>
+      <a class="nav-item" href="inventory.html"><span class="nav-icon">📦</span> Inventory</a>
+      <a class="nav-item" href="marketing.html"><span class="nav-icon">📣</span> Marketing</a>
+    </nav>
+    <div class="sidebar-footer">RetailIQ v2.0 · Data: Oct 2024</div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button id="menuBtn" style="background:none;border:none;font-size:1.3rem;cursor:pointer;display:none;">☰</button>
+        <div>
+          <div class="page-title">Inventory Intelligence</div>
+          <div class="page-subtitle">Category performance, margins & stock levels</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+  <span class="date-badge">📅 Mar 2023 – Oct 2024</span>
+  <span class="live-dot">Live Data</span>
+</div>
+    </div>
+<div class="filter-bar">
+  <div class="filter-group">
+    <label>Category</label>
+    <select class="filter-select" id="filterCategory">
+      <option value="all">All Categories</option>
+      <option value="dairy-breakfast">Dairy & Breakfast</option>
+      <option value="snacks">Snacks</option>
+      <option value="pet-care">Pet Care</option>
+      <option value="fruits-veg">Fruits & Veg</option>
+      <option value="pharmacy">Pharmacy</option>
+      <option value="grocery">Grocery</option>
+      <option value="personal-care">Personal Care</option>
+      <option value="household-care">Household Care</option>
+      <option value="cold-drinks">Cold Drinks</option>
+      <option value="frozen-food">Frozen Food</option>
+      <option value="baby-care">Baby Care</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Segment</label>
+    <select class="filter-select" id="filterSegment">
+      <option value="all">All Segments</option>
+      <option value="regular">Regular</option>
+      <option value="premium">Premium</option>
+      <option value="new">New</option>
+      <option value="inactive">Inactive</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Payment</label>
+    <select class="filter-select" id="filterPayment">
+      <option value="all">All Methods</option>
+      <option value="card">Card</option>
+      <option value="cash">Cash</option>
+      <option value="wallet">Wallet</option>
+      <option value="upi">UPI</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Delivery</label>
+    <select class="filter-select" id="filterDelivery">
+      <option value="all">All Status</option>
+      <option value="on-time">On Time</option>
+      <option value="delayed">Delayed</option>
+    </select>
+  </div>
+
+  <button class="btn-reset" id="resetFilters">
+    ✕ Reset
+  </button>
+</div>
+ 
+    <div class="page-content">
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card green">
+          <div class="kpi-icon">📦</div>
+          <div class="kpi-label">Product Categories</div>
+          <div class="kpi-value" data-count="11" data-decimals="0">0</div>
+          <div class="kpi-sub">Across all SKUs</div>
+        </div>
+        <div class="kpi-card yellow">
+          <div class="kpi-icon">🏆</div>
+          <div class="kpi-label">Top Category Revenue</div>
+          <div class="kpi-value" data-count="1244369" data-prefix="₹" data-decimals="0">₹0</div>
+          <div class="kpi-sub">Dairy &amp; Breakfast</div>
+        </div>
+        <div class="kpi-card blue">
+          <div class="kpi-icon">💹</div>
+          <div class="kpi-label">Highest Margin</div>
+          <div class="kpi-value" data-count="40" data-suffix="%" data-decimals="0">0%</div>
+          <div class="kpi-sub">Instant &amp; Frozen Food</div>
+        </div>
+        <div class="kpi-card purple">
+          <div class="kpi-icon">📊</div>
+          <div class="kpi-label">Avg Category Margin</div>
+          <div class="kpi-value" data-count="28.6" data-suffix="%" data-decimals="1">0%</div>
+          <div class="kpi-sub">Across 11 categories</div>
+        </div>
+      </div>
+
+      <!-- Revenue by Category (full width) -->
+      <div class="chart-grid chart-grid-1" style="margin-bottom:20px;">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <div class="chart-card-title">Revenue by Category</div>
+              <div class="chart-card-sub">Dairy &amp; Breakfast leads with ₹12.4L · Baby Care lowest at ₹7.4L</div>
+            </div>
+            <span class="chart-badge green">11 Categories</span>
+          </div>
+          <div class="chart-wrap" style="height:320px;">
+            <canvas id="invCatRevenue"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Margin + Order Share -->
+      <div class="chart-grid chart-grid-2" style="margin-bottom:20px;">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <div class="chart-card-title">Category Profit Margins</div>
+              <div class="chart-card-sub">🟢 High ≥35% · 🟡 Mid ≥25% · 🟠 Low &lt;25%</div>
+            </div>
+            <span class="chart-badge yellow">Margin Analysis</span>
+          </div>
+          <div class="chart-wrap" style="height:280px;">
+            <canvas id="categoryMargin"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <div class="chart-card-title">Order Share by Category</div>
+              <div class="chart-card-sub">Volume distribution across categories</div>
+            </div>
+            <span class="chart-badge blue">5,000 Orders</span>
+          </div>
+          <div class="chart-wrap" style="height:280px;">
+            <canvas id="categoryOrders"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inventory Detail Table -->
+      <div class="data-table-wrap" style="margin-bottom:20px;">
+        <div class="data-table-header">
+          <h3>Category Intelligence Table</h3>
+          <span class="chart-badge green">11 Categories</span>
+        </div>
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Revenue</th>
+              <th>Orders</th>
+              <th>Margin %</th>
+              <th>Min Stock</th>
+              <th>Max Stock</th>
+              <th>Opportunity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Dairy &amp; Breakfast</strong></td>
+              <td>₹12,44,369</td>
+              <td>520</td>
+              <td><span class="pill gray">20%</span></td>
+              <td>22</td><td>58</td>
+              <td><span class="pill yellow">Margin Push</span></td>
+            </tr>
+            <tr>
+              <td><strong>Household Care</strong></td>
+              <td>₹11,36,440</td>
+              <td>498</td>
+              <td><span class="pill gray">25%</span></td>
+              <td>18</td><td>62</td>
+              <td><span class="pill blue">Bundle Deals</span></td>
+            </tr>
+            <tr>
+              <td><strong>Pet Care</strong></td>
+              <td>₹11,25,104</td>
+              <td>485</td>
+              <td><span class="pill green">35%</span></td>
+              <td>16</td><td>57</td>
+              <td><span class="pill green">Scale Up</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fruits &amp; Veg</strong></td>
+              <td>₹10,85,103</td>
+              <td>475</td>
+              <td><span class="pill gray">25%</span></td>
+              <td>15</td><td>55</td>
+              <td><span class="pill blue">Freshness Drive</span></td>
+            </tr>
+            <tr>
+              <td><strong>Pharmacy</strong></td>
+              <td>₹10,55,812</td>
+              <td>462</td>
+              <td><span class="pill gray">20%</span></td>
+              <td>14</td><td>60</td>
+              <td><span class="pill purple">Subscription</span></td>
+            </tr>
+            <tr>
+              <td><strong>Snacks</strong></td>
+              <td>₹10,43,582</td>
+              <td>458</td>
+              <td><span class="pill green">35%</span></td>
+              <td>20</td><td>63</td>
+              <td><span class="pill green">High Priority</span></td>
+            </tr>
+            <tr>
+              <td><strong>Grocery</strong></td>
+              <td>₹10,05,495</td>
+              <td>446</td>
+              <td><span class="pill red">15%</span></td>
+              <td>19</td><td>58</td>
+              <td><span class="pill orange">Margin Review</span></td>
+            </tr>
+            <tr>
+              <td><strong>Personal Care</strong></td>
+              <td>₹10,03,163</td>
+              <td>440</td>
+              <td><span class="pill green">35%</span></td>
+              <td>17</td><td>56</td>
+              <td><span class="pill green">Scale Up</span></td>
+            </tr>
+            <tr>
+              <td><strong>Cold Drinks</strong></td>
+              <td>₹8,28,002</td>
+              <td>380</td>
+              <td><span class="pill gray">30%</span></td>
+              <td>12</td><td>45</td>
+              <td><span class="pill blue">Seasonal Push</span></td>
+            </tr>
+            <tr>
+              <td><strong>Frozen Food</strong></td>
+              <td>₹7,41,183</td>
+              <td>340</td>
+              <td><span class="pill green" style="background:#dcfce7;color:#15803d;">40%</span></td>
+              <td>10</td><td>42</td>
+              <td><span class="pill green">Highest Margin!</span></td>
+            </tr>
+            <tr>
+              <td><strong>Baby Care</strong></td>
+              <td>₹7,41,055</td>
+              <td>338</td>
+              <td><span class="pill gray">30%</span></td>
+              <td>11</td><td>44</td>
+              <td><span class="pill purple">Loyalty Bundle</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Insights -->
+      <div class="insights-panel">
+        <h3>📦 Inventory Insights</h3>
+        <div class="insights-grid">
+          <div class="insight-item">
+            <div class="insight-header"><span class="insight-icon">💎</span><span class="insight-tag">Hidden Gem</span></div>
+            <p class="insight-text">Frozen Food has the highest margin (40%) but ranks 10th in revenue. A targeted campaign could unlock ₹3–4L incremental revenue with minimal spend.</p>
+          </div>
+          <div class="insight-item">
+            <div class="insight-header"><span class="insight-icon">⚠️</span><span class="insight-tag">Low Margin</span></div>
+            <p class="insight-text">Grocery leads orders but has just 15% margin — the lowest across all categories. A pricing review or supplier renegotiation is needed to protect profitability.</p>
+          </div>
+          <div class="insight-item">
+            <div class="insight-header"><span class="insight-icon">🚀</span><span class="insight-tag">Scale Now</span></div>
+            <p class="insight-text">Pet Care, Snacks, and Personal Care all have 35%+ margins AND strong revenue. These are the ideal categories to prioritize for promotional investment.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/data.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
